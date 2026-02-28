@@ -4,8 +4,8 @@ Two minimal iOS-style **MVVM** projects used by the [showcase script](../example
 
 | Project     | Description |
 |------------|-------------|
-| **project_a** | Task list: `TaskItem`, `TaskListViewModel`, `TaskListView`. Plain `Info.plist`. |
-| **project_b** | Notes: `NoteItem`, `NoteListViewModel`, `NoteListView`. `Info.plist` includes `NSPhotoLibraryUsageDescription`; has `Resources/Assets.xcassets`. |
+| **project_a** | Task list: `TaskItem`, `TaskListViewModel`, `TaskListView`, `SettingsView`, `TaskDetailView`, `TaskStorageService`, `SettingsViewModel`, `Date+Format`. `Info.plist`: `UIBackgroundModes` (fetch). |
+| **project_b** | Notes: `NoteItem`, `NoteListViewModel`, `NoteListView`, `NoteEditorView`, `ShareSheetView`, `APIClient`, `AppCoordinator`. `ProjectB.entitlements`, `Info.plist` (Photo, Camera, Location, URL scheme), `Base.lproj/Localizable.strings`, `AccentColor.colorset`. |
 
 They are **not** full Xcode projects (no `.xcodeproj`); they are source layouts for reference. The showcase script runs `git init` in each (if needed) so `--save` works, then runs:
 
