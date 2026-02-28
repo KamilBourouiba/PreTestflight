@@ -1,0 +1,40 @@
+# TestFlight Review Suggestion Prompt
+
+You are analyzing an iOS/macOS app submission to produce prioritized, actionable suggestions that reduce Apple TestFlight/App Store review time and rejection risk.
+
+## Input context
+You will receive: file paths changed, Info.plist excerpts, entitlements, and optionally code snippets (CONTEXT_FILE).
+
+## Output format
+
+Provide suggestions in this order of priority:
+
+1. **Privacy and permissions**
+   - Map each permission (camera, location, photo library, etc.) to the correct Info.plist usage description key (e.g. NSCameraUsageDescription).
+   - List any missing keys and suggest exact key names and recommended description text.
+   - Flag permissions requested but not clearly used in the app.
+
+2. **Deterministic launch and state**
+   - Suggest removing or guarding any code that could make the app behave differently on first launch (e.g. onboarding that blocks main UI).
+   - Recommend a consistent initial state for reviewers (e.g. skip onboarding in debug or use a review-mode flag).
+
+3. **Demo and test content**
+   - Identify demo accounts, test data, or debug menus that should be removed or hidden in release.
+   - Provide patch snippets to guard such code with `#if DEBUG` or feature flags.
+
+4. **Accessibility**
+   - List UI elements that may lack accessibility labels or hints.
+   - Suggest VoiceOver improvements and minimum touch target sizes (44pt) where relevant.
+
+5. **Other review hotspots**
+   - Entitlements that might trigger extra review (e.g. certain capabilities).
+   - Network/API usage that may require privacy manifest or App Transport Security notes.
+
+For each suggestion:
+- **Title**: Short actionable title
+- **Affected files/keys**: Paths or Info.plist keys
+- **Priority**: High / Medium / Low
+- **Patch snippet** (where applicable): Unified diff or code snippet the developer can apply
+- **Rationale**: One sentence on why this helps review
+
+Output both human-readable text and a machine-readable JSON array of suggestions with fields: title, affected_files, priority, patch_snippet, rationale.

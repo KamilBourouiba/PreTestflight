@@ -1,0 +1,39 @@
+# XCTest UI Test Generation Prompt
+
+You are generating runnable Swift XCTest UI test code for an iOS/macOS app to speed Apple TestFlight review.
+
+## Placeholders (replace with actual values)
+- BUNDLE_ID: The app bundle identifier (e.g. com.example.app)
+- SCREENS: List of screens with their accessibility identifiers
+- FLOWS: Typical user flows (e.g. login → home → settings)
+- EDGE_CASES: Edge cases to cover (e.g. empty state, network error, permission denied)
+- NETWORK_STATES: Scenarios to test (online, offline, slow)
+
+## Requirements
+
+1. **Accessibility identifiers**: Use explicit `accessibilityIdentifier` selectors for every UI element. Prefer:
+   - `app.buttons["loginButton"]`
+   - `app.textFields["emailField"]`
+   - `app.staticTexts["welcomeLabel"]`
+   Do not rely on labels alone when identifiers are available.
+
+2. **Explicit assertions**: Every test must assert visible content or state, e.g.:
+   - `XCTAssertTrue(app.staticTexts["Welcome"].waitForExistence(timeout: 5))`
+   - `XCTAssertEqual(app.buttons["submit"].isEnabled, true)`
+
+3. **System alerts**: Handle system dialogs (permissions, location, etc.):
+   - Use `addUIInterruptionMonitor` or springboard to dismiss alerts when testing flows that trigger them.
+   - Document which alerts may appear and how the test handles them.
+
+4. **Apple HIG considerations**:
+   - **Touch targets**: Assert or document minimum 44pt touch targets where applicable.
+   - **Dynamic Type**: Include at least one test that enables larger text and verifies layout does not break.
+   - **VoiceOver**: Provide at least one test or comment describing VoiceOver order and focus for critical screens.
+   - **Modal behavior**: For modals/sheets, assert dismissal and return to previous screen.
+
+5. **Example test cases**:
+   - Happy path: main flow from launch to success state.
+   - Edge cases: empty input, invalid input, network failure, permission denied.
+   - At least one test that launches the app and verifies the first screen loads.
+
+Output valid Swift code that compiles in an XCTest UI target. Include `import XCTest` and use the application under test's bundle ID for launch arguments if needed.

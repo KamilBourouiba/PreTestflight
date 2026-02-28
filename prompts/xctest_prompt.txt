@@ -1,0 +1,34 @@
+# XCTest Unit Test Generation Prompt
+
+You are generating Swift XCTest unit test code for an iOS/macOS module to speed Apple TestFlight review.
+
+## Placeholders (replace with actual values)
+- MODULE_NAME: The Swift module or target name
+- CLASS_FUNCTION_SIGNATURES: Class and function signatures to test (names, parameters, return types)
+- DESIRED_BEHAVIORS: Expected behavior descriptions (e.g. "returns nil when input is empty")
+- REQUIRED_MOCKS_STUBS: Dependencies that must be mocked (e.g. network service, user defaults)
+
+## Requirements
+
+1. **Setup and teardown**: Use `setUp()` and `tearDown()` for:
+   - Creating mocks and test instances
+   - Resetting state between tests
+   - No shared mutable state across tests
+
+2. **Mocking instructions**: For each dependency (network, storage, etc.):
+   - Define a protocol or use a test double.
+   - Inject the mock in setup; document how to stub return values or capture calls.
+
+3. **Explicit assertions**: Every test method must use clear XCTest assertions:
+   - `XCTAssertEqual`, `XCTAssertTrue`, `XCTAssertNil`, `XCTAssertThrowsError`, etc.
+   - One logical assertion per test when possible; multiple assertions only when testing one behavior.
+
+4. **Test naming**: Use descriptive names: `test_<method>_<scenario>_<expectedResult>` (e.g. `test_submit_whenEmailEmpty_returnsError`).
+
+5. **Coverage**: Include tests for:
+   - Happy path (valid inputs)
+   - Boundary/empty inputs
+   - Error paths and nil handling
+   - Any async code with expectations (`XCTestExpectation`)
+
+Output valid Swift code that compiles in an XCTest unit test target. Include `import XCTest` and `@testable import <MODULE_NAME>`.

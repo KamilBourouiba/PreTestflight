@@ -1,0 +1,15 @@
+# PreTestflight outputs (keep repo clean)
+out/
+generated/
+compare_saves_summary.txt
+compare_saves_summary.json
+compare_saves_diff.txt
+compare_repos_report.txt
+compare_repos_summary.json
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*~
