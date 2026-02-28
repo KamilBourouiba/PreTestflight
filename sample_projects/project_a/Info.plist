@@ -7,5 +7,7 @@
     <string>ProjectA</string>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
+    <key>UIBackgroundModes</key>
+    <array><string>fetch</string></array>
 </dict>
 </plist>

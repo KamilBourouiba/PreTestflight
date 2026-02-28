@@ -9,5 +9,18 @@
     <string>LaunchScreen</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Used to attach photos to notes.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>To capture images for your notes.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>To tag notes with location.</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array><string>notes</string></array>
+            <key>CFBundleURLName</key>
+            <string>com.sample.project_b</string>
+        </dict>
+    </array>
 </dict>
 </plist>
