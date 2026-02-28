@@ -33,6 +33,7 @@ echo "  -> $ZIP_A"
 echo ""
 
 echo "--- 2. LOCAL: Save project_b ---"
+sleep 1   # ensure different timestamp so we get two zips for compare-saves
 cd "$ROOT/sample_projects/project_b"
 "$PRETESTFLIGHT" --save -o "$OUT" --message "project_b snapshot"
 cd "$ROOT"
