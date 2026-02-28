@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.sample.project_b</string>
+    <key>CFBundleName</key>
+    <string>ProjectB</string>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Used to attach photos to notes.</string>
+</dict>
+</plist>

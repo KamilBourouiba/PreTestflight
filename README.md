@@ -22,6 +22,7 @@ Command-line tool to capture code state, compare saves and repositories, and pro
   - [--generate-xctests](#--generate-xctests---generate-unit-test-stubs)
   - [--suggest](#--suggest---testflight-review-suggestions)
 - [Full workflow example](#full-workflow-example)
+- [Example projects and showcase](#example-projects-and-showcase)
 - [Security and limits](#security-and-limits)
 
 ---
@@ -49,6 +50,12 @@ PreTestflight/
 │   ├── ui_test_prompt.txt    # Prompt template for UI tests
 │   ├── xctest_prompt.txt     # Prompt template for unit tests
 │   └── suggestion_prompt.txt # Prompt template for review suggestions
+├── sample_projects/          # Two MVVM example apps for showcase
+│   ├── project_a/            # Task list (SwiftUI + ViewModel)
+│   ├── project_b/            # Notes app (SwiftUI + ViewModel)
+│   └── README.md
+├── examples/
+│   └── run_showcase.sh       # Runs ~10 commands (local + LM)
 ├── .gitignore
 └── README.md
 ```
@@ -357,6 +364,37 @@ cd ~/MyApp
 # Or with LM Studio:
 /path/to/PreTestflight/pretestflight.sh --use-llm --suggest --context ./snapshots/compare_repos_report.txt --output ./review/suggestions
 ```
+
+---
+
+## Example projects and showcase
+
+The repo includes two minimal **MVVM** sample apps and a script that runs **10 commands** (local and LM) so you can see every subcommand in action.
+
+- **sample_projects/project_a** — Task list: `TaskItem`, `TaskListViewModel`, `TaskListView`
+- **sample_projects/project_b** — Notes: `NoteItem`, `NoteListViewModel`, `NoteListView` (with `NSPhotoLibraryUsageDescription` in Info.plist)
+
+Run the showcase from the repo root:
+
+```bash
+chmod +x examples/run_showcase.sh
+./examples/run_showcase.sh
+```
+
+| Step | Type | Command |
+|------|------|---------|
+| 1 | Local | `--save` from project_a |
+| 2 | Local | `--save` from project_b |
+| 3 | Local | `--compare-saves` (two zips) |
+| 4 | Local | `--compare-repos` (project_a vs project_b) |
+| 5 | Local | `--generate-ui-tests` |
+| 6 | Local | `--generate-xctests --module ProjectA` |
+| 7 | Local | `--suggest` |
+| 8 | LM | `--use-llm --generate-ui-tests` |
+| 9 | LM | `--use-llm --generate-xctests --module ProjectA` |
+| 10 | LM | `--use-llm --suggest` |
+
+Outputs go to `out/` (gitignored). For steps 8–10, start **LM Studio** with a model and local server (port 1234); if it’s not running, the script falls back to stubs or skips. See [sample_projects/README.md](sample_projects/README.md) for details.
 
 ---
 

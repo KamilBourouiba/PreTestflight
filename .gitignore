@@ -1,6 +1,10 @@
 # PreTestflight outputs (keep repo clean)
 out/
 generated/
+
+# Nested git in sample projects (showcase inits them when run)
+sample_projects/project_a/.git/
+sample_projects/project_b/.git/
 compare_saves_summary.txt
 compare_saves_summary.json
 compare_saves_diff.txt
